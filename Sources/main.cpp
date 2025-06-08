@@ -80,7 +80,7 @@ exit:
     void    INFO_Menu()
     {
         
-        static char path[256];
+        char path[256];
         u64 title_id[16];
         PluginLoaderContext PluginLoaderCtx;
         PluginLoaderContext *ctx = &PluginLoaderCtx;
@@ -89,7 +89,7 @@ exit:
 
         svcGetProcessInfo((s64 *)&title_id, (Handle)ctx->target, 0x10001);
 
-        sprintf(&path, "luma/plugins/%016llX/", title_id);
+        sprintf(path, "luma/plugins/%016llX/", title_id);
 
         OSD::Notify(Color(234, 145, 152) << path);
     }
