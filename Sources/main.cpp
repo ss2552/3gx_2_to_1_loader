@@ -77,10 +77,10 @@ exit:
         ToggleTouchscreenForceOn();
     }
 
-    void    INFO_Menu()
+    void    INFO_Menu(PluginMenu &menu)
     {
         
-        char path[256];
+        std::string path[32];
         u64 title_id[16];
         PluginLoaderContext PluginLoaderCtx;
         PluginLoaderContext *ctx = &PluginLoaderCtx;
@@ -90,7 +90,7 @@ exit:
         svcGetProcessInfo((s64 *)&title_id, (Handle)ctx->target, 0x10001);
 
         sprintf(path, "luma/plugins/%016llX/", title_id);
-
+        
         OSD::Notify(Color(234, 145, 152) << path);
     }
 
@@ -102,7 +102,7 @@ exit:
         
         // OSD::Notify(Color(234, 145, 152) << "0x07000100");
         
-        INFO_Menu();       
+        INFO_Menu(*menu);       
 
         // START SHOW MENU
         menu->Run();
