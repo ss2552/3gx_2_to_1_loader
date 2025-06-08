@@ -5,6 +5,7 @@
 
 #include <vector>
 
+/*
 typedef struct PACKED{
     u64             magic;
     u32             version;
@@ -15,6 +16,7 @@ typedef struct PACKED{
 // sdカードの3gxの数
 
 // 3gxの選択
+*/
 
 namespace CTRPluginFramework
 {
