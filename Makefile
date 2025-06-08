@@ -31,7 +31,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
 ASFLAGS		:=	$(ARCH)
 LDFLAGS		:= -T $(TOPDIR)/3ds.ld $(ARCH) -Os -Wl,-Map,$(notdir $*.map),--gc-sections 
 
-LIBS		:= -lCTRPluginFramework
+LIBS		:= -llibctrpf
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
