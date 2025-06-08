@@ -1,6 +1,6 @@
 #include <3ds.h>
 #include "csvc.h"
-#include "CTRPluginFramework.hpp"
+#include <CTRPluginFramework.hpp>
 
 #include <vector>
 
