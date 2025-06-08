@@ -7,8 +7,6 @@ endif
 TOPDIR 		?= 	$(CURDIR)
 include $(DEVKITARM)/3ds_rules
 
-CTRPFLIB	?=	$(DEVKITPRO)/libctrpf
-
 TARGET		:= 	$(notdir $(CURDIR))
 PLGINFO 	:= 	CTRPluginFramework.plgInfo
 
@@ -32,7 +30,7 @@ ASFLAGS		:=	$(ARCH)
 LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -Wl,--gc-sections,--strip-discarded,--strip-debug
 
 LIBS		:= -lctrpf -lctru
-LIBDIRS		:= 	$(CTRPFLIB) $(CTRULIB) $(PORTLIBS)
+LIBDIRS		:= 	$(CTRULIB) $(PORTLIBS)
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -69,12 +67,8 @@ $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
-#---------------------------------------------------------------------------------
-clean:
-	@echo clean ... 
-	@rm -fr $(BUILD) $(OUTPUT).3gx $(OUTPUT).elf
 
-re: clean all
+re: all
 
 #---------------------------------------------------------------------------------
 
