@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     
     container: 
-      image: pablomk7/libctrpf:0.8.0
+      image: devkitpro/devkitarm
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: 作る
       run: make
