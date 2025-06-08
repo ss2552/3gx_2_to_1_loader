@@ -10,12 +10,13 @@ jobs:
     container: pablomk7/libctrpf:0.8.0
     
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-    - name: make
-      run: make
-
-    - uses: actions/upload-artifact@v4
-      with:
-        name: out
-        path: ./
+      - name: 作る
+        run: make
+  
+      - name: アップロード
+        uses: actions/upload-artifact@v4
+        with:
+          name: out
+          path: ./
