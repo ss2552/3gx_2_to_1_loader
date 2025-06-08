@@ -1,24 +1,23 @@
-name: BUILD_3GX
+name: BUILD 3GX
 
 on:
   push:
-    branches: [ "main" ]
-
+    branches: [ master ]
 jobs:
   build:
-  
+
     runs-on: ubuntu-latest
     
-    container: 
-      image: devkitpro/devkitarm
-    
+    container:
+      image: pablomk7/libctrpf:0.8.0
+
     steps:
-    - uses: actions/checkout@v4
-
-    - name: 作る
+    - uses: actions/checkout@v2
+      
+    - name: TUKURU
       run: make
-
-    - name: アップロード
+      
+    - name: AGERU
       uses: actions/upload-artifact@v4
       with:
         name: out
