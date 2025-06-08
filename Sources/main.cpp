@@ -1,8 +1,20 @@
 #include <3ds.h>
 #include "csvc.h"
 #include <CTRPluginFramework.hpp>
+#include <plgloader.h>
 
 #include <vector>
+
+typedef struct PACKED{
+    u64             magic;
+    u32             version;
+    u32             reserved;
+}_simple_3gx_Header
+
+// タイトルIDの取得
+// sdカードの3gxの数
+
+// 3gxの選択
 
 namespace CTRPluginFramework
 {
@@ -65,10 +77,23 @@ exit:
 
     void    InitMenu(PluginMenu &menu)
     {
+
+        volatile char path[256];
+        volatile char title_id[16];
+        PluginLoaderContext PluginLoaderCtx;
+        PluginLoaderContext *ctx = &PluginLoaderCtx;
+        u32 *cmdbuf = getThreadCommandBuffer();
+        svcOpenProcess(&ctx->target, cmdbuf[1]);
+
+        svcGetProcessInfo((s64 *)&title_id, (Handle)ctx->target, 0x10001);
+
+        sprintf(&path, "luma/plugins/%016llX/", title_id);
+        
+        new MessageBox(path)
+
     }
 
-    int     main(void)
-    {
+    int     main(void){
         PluginMenu *menu = new PluginMenu("TEST", 0, 8, 0, "よう");
 
         menu->SynchronizeWithFrame(true);
@@ -76,8 +101,8 @@ exit:
         
         OSD::Notify(Color(234, 145, 152) << "0x07000100");
         
-        InitMenu(*menu);
-        
+        InitMenu(*menu);       
+
         // START SHOW MENU
         menu->Run();
 
