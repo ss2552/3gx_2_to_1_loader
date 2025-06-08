@@ -80,7 +80,7 @@ exit:
     void    InitMenu()
     {
         
-        volatile char *path[256];
+        static char path[256];
         u64 title_id[16];
         PluginLoaderContext PluginLoaderCtx;
         PluginLoaderContext *ctx = &PluginLoaderCtx;
