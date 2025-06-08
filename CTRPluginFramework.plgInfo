@@ -2,23 +2,23 @@ Author: esu
 
 Version:
     Major: 0
-    Minor: 8
-    Revision: 0
+    Minor: 7
+    Revision: 2
 
-Targets:
+Targets: # Low TitleId of games which are compatibles with this plugin (0 for all)
 
 Title: 3GX Legacy Loader
 
-Summary: unknow
+Summary: A CTRPF Plugin, with a lot of tools
 
 Description: |
-    no messages
+  This plugin gives you access to a set of tools to edit your games
 
   Features:
     - Hex Editor
 
 Compatibility: Any
 
-MemorySize: 5MiB # 最大値はなんだ
+MemorySize: 5MiB
 
 UsePrivateMemory: false
