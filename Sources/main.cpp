@@ -3,6 +3,9 @@
 #include <CTRPluginFramework.hpp>
 #include <plgloader.h>
 
+#include <stdio.h>
+#include <string>
+#include <sstream>
 #include <vector>
 
 /*
@@ -80,7 +83,8 @@ exit:
     void    INFO_Menu(PluginMenu &menu)
     {
         
-        std::string path[32];
+        std::ostringstream oss;
+        
         u64 title_id[16];
         PluginLoaderContext PluginLoaderCtx;
         PluginLoaderContext *ctx = &PluginLoaderCtx;
@@ -89,9 +93,11 @@ exit:
 
         svcGetProcessInfo((s64 *)&title_id, (Handle)ctx->target, 0x10001);
 
-        sprintf(path, "luma/plugins/%016llX/", title_id);
+        // sprintf(path, , title_id);
+        oss << title_id;
+        // std::string path[32] = "luma/plugins/" + oss.str().c_str();
         
-        OSD::Notify(Color(234, 145, 152) << path);
+        OSD::Notify(Color(234, 145, 152) << oss.str().c_str());
     }
 
     int     main(void){
@@ -107,6 +113,7 @@ exit:
         // START SHOW MENU
         menu->Run();
 
+        
         // END
         delete menu;
         return (0);
