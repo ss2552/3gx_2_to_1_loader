@@ -1,0 +1,21 @@
+name: BUILD_3GX
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: alphine-latest
+    container: devkitpro/devkitarm
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: make
+      run: make
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: out
+        path: ./
