@@ -82,22 +82,8 @@ exit:
 
     void    INFO_Menu(PluginMenu &menu)
     {
-        
-        std::ostringstream oss;
-        
-        u64 title_id[16];
-        PluginLoaderContext PluginLoaderCtx;
-        PluginLoaderContext *ctx = &PluginLoaderCtx;
-        u32 *cmdbuf = getThreadCommandBuffer();
-        svcOpenProcess(&ctx->target, cmdbuf[1]);
-
-        svcGetProcessInfo((s64 *)&title_id, (Handle)ctx->target, 0x10001);
-
-        // sprintf(path, , title_id);
-        oss << title_id;
-        // std::string path[32] = "luma/plugins/" + oss.str().c_str();
-        
-        OSD::Notify(Color(234, 145, 152) << oss.str().c_str());
+        std::ostringstream tid = process::GetTitleID();
+        OSD::Notify(Color(234, 145, 152) << oss.str());
     }
 
     int     main(void){
