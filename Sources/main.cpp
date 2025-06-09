@@ -82,8 +82,13 @@ exit:
 
     void    INFO_Menu(PluginMenu &menu)
     {
-        std::ostringstream tid = process::GetTitleID();
-        OSD::Notify(Color(234, 145, 152) << oss.str());
+        s64 tid;
+        std::ostringstream tid_s;
+        svcGetProcessInfo(&tid, CUR_PROCESS_HANDLE, 0x10001);
+
+        tid_s << tid;
+
+        OSD::Notify(Color(128, 128, 128) << tid_s.str());
     }
 
     int     main(void){
