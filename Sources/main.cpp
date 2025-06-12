@@ -1,112 +1,113 @@
 #include <3ds.h>
-#include "csvc.h"
-#include <CTRPluginFramework.hpp>
-#include <plgloader.h>
 
 #include <stdio.h>
 #include <string>
 #include <sstream>
 #include <vector>
 
-/*
+// share memory
+
 typedef struct PACKED{
     u64             magic;
     u32             version;
     u32             reserved;
-}_simple_3gx_Header
+}_simple_3gx_Header;
 
 // タイトルIDの取得
 // sdカードの3gxの数
 
 // 3gxの選択
-*/
+
+// luma/plugins/{title_id}/legacys/*.3gx
+// legacy_3gx/*.3gx
+
+extern "C"{
+
+    void message(char msg){
+        // u8 y = 5;
+        OSD::Notify(Color(128, 128, 128) << msg);
+        for(uint16_ti = 0; i < 30000; i++);
+        /*
+        y += 5;
+        if(y < 240)
+            y = 5;
+        */
+    }
+
+    void error(char msg){
+        message(msg);
+        while(!hidScanInput());
+    }
+}
 
 namespace CTRPluginFramework
 {
+    // 0x07000100 0x07FFFFFF
+    // 0x04000000 0x06FFF000
+    void main(void){
+        
 
-    static void    ToggleTouchscreenForceOn(void)
-    {
-        static u32 original = 0;
-        static u32 *patchAddress = nullptr;
-
-        if (patchAddress && original)
-        {
-            *patchAddress = original;
-            return;
+        // タイトルIDの取得
+        s64 tid[33];
+        Result result = svcGetProcessInfo(tid, CUR_PROCESS_HANDLE, 0x10001);
+        if(!result){
+            error("TID");
         }
+        message("タイトルID取得した");
+        (void)result;
+        message("ok");
 
-        static const std::vector<u32> pattern =
-        {
-            0xE59F10C0, 0xE5840004, 0xE5841000, 0xE5DD0000,
-            0xE5C40008, 0xE28DD03C, 0xE8BD80F0, 0xE5D51001,
-            0xE1D400D4, 0xE3510003, 0x159F0034, 0x1A000003
-        };
 
-        Result  res;
-        Handle  processHandle;
-        s64     textTotalSize = 0;
-        s64     startAddress = 0;
-        u32 *   found;
+        /*
+        // sd MOUNT
+        archiveMountSdmc();
+        message("sdをマウントした");
 
-        if (R_FAILED(svcOpenProcess(&processHandle, 16)))
-            return;
+            
 
-        svcGetProcessInfo(&textTotalSize, processHandle, 0x10002);
-        svcGetProcessInfo(&startAddress, processHandle, 0x10005);
-        if(R_FAILED(svcMapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000, processHandle, (u32)startAddress, textTotalSize)))
-            goto exit;
-
-        found = (u32 *)Utils::Search<u32>(0x14000000, (u32)textTotalSize, pattern);
-
-        if (found != nullptr)
-        {
-            original = found[13];
-            patchAddress = (u32 *)PA_FROM_VA((found + 13));
-            found[13] = 0xE1A00000;
-        }
-
-        svcUnmapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000, textTotalSize);
-exit:
-        svcCloseHandle(processHandle);
-    }
-
-    void    PatchProcess(FwkSettings &settings)
-    {
-        ToggleTouchscreenForceOn();
-    }
-
-    void    OnProcessExit(void)
-    {
-        ToggleTouchscreenForceOn();
-    }
-
-    void    INFO_Menu(PluginMenu &menu)
-    {
-        s64 tid;
-        std::ostringstream tid_s;
-        svcGetProcessInfo(&tid, CUR_PROCESS_HANDLE, 0x10001);
-
-        tid_s << tid;
-
-        OSD::Notify(Color(128, 128, 128) << tid_s.str());
-    }
-
-    int     main(void){
-        PluginMenu *menu = new PluginMenu("TEST", 0, 8, 0, "よう");
-
-        menu->SynchronizeWithFrame(true);
-        menu->ShowWelcomeMessage(false);
-        
-        // OSD::Notify(Color(234, 145, 152) << "0x07000100");
-        
-        INFO_Menu(*menu);       
-
-        // START SHOW MENU
-        menu->Run();
+        // 3gxのファイルパス
+        char path_c[32];
+        int result = sprintf(path_c, "sdmc:/l3gx/%016llX", tid);
+        std::string path = path_c;
+        message("ファイルパス");
 
         
-        // END
-        delete menu;
-        return (0);
+        
+        // 3gxの検索
+        std::string 3gx_path = path << "/" << tid << ".3gx" << std::end;
+            
+
+
+        IFile   plugin;
+        OpenFile(&plugin, 3gx_path);
+
+
+
+        simple_3gx_header 3gx_header = (simple_3gx_header *)(g_memBlock + MemBlockSize - (u32)fileSize);
+        Read_3gx_Header(plugin, 3gx_header);
+        
+
+
+        if (plugin.magic == _3GX_MAGIC)
+        // linker
+        0x7000100~0x7FFFFDF main
+        0x7000100~0x7XXXXDF 3GX0001
+        ローダのサイズ分
+        0x7XXXXXX~0x7FFFFDF 3gx0001_loader[asm] 3gx_rw jump
+        */
+        // ReadFile("3gx_selector.bin", (0x7000100 + 0x3FFFFF) - 3gx_selector_size)
     }
+
 }
+
+/*
+タイトルidの取得
+ファイルパス
+3gxの検索
+3gxのopen
+ヘッダーの読み込み
+マジックの確認
+if 0001なら
+    binをロード
+3gxを
+*/
