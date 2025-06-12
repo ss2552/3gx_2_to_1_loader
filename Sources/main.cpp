@@ -1,4 +1,6 @@
 #include <3ds.h>
+#include "csvc.h"
+#include <CTRPluginFramework.hpp>
 
 #include <stdio.h>
 #include <string>
