@@ -5,14 +5,14 @@ Version:
     Minor: 8
     Revision: 0
 
-Targets: # Low TitleId of games which are compatibles with this plugin (0 for all)
+Targets: # all
 
-Title: 3GX Legacy Loader
+Title: TEST
 
-Summary: A CTRPF Plugin, with a lot of tools
+Summary: TEST
 
 Description: |
-  This plugin gives you access to a set of tools to edit your games
+  TEST
 
   Features:
     - Hex Editor
