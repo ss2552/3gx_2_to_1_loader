@@ -43,5 +43,10 @@ bootrom 0x07FF8000 ~ 0x07FFF000
 unknow memory field 0x0708DFFF
 
 # ヒープ領域
-0x06000000
+3gx VA 0x06000000 | physical address ?0x0x060AC9F8
 多分 3gx heap memory 0x0x060AC9F8
+
+
+# あんま関係無い
+top 0x1FFFE000
+bottom 0x0x1FFFD000
