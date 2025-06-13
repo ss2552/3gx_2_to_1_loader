@@ -1,4 +1,4 @@
-# 共有メモリ ((max_size - loader_size - 1F) ~ sizeof 0x1F)
+# 共有メモリ
 
 # main - 0x07000100
 
@@ -42,4 +42,6 @@ bootrom 0x07FF8000 ~ 0x07FFF000
 
 unknow memory field 0x0708DFFF
 
-maybe 3gx heap memory 0x0x60AC9F8
+# ヒープ領域
+0x06000000
+多分 3gx heap memory 0x0x060AC9F8
