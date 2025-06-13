@@ -1,3 +1,5 @@
+# 共有メモリ ((max_size - loader_size - 1F) ~ sizeof 0x1F)
+
 # main - 0x07000100
 
 ○ plg:ldrの無効化
@@ -23,8 +25,6 @@
   そうで無かったら
     0002を実行
 
-# 共有メモリ ((max_size - loader_size - 1F) ~ sizeof 0x1F)
-
 # サービス loader
 ○ lecacy loaderを有効化
 
@@ -40,6 +40,6 @@
 
 bootrom 0x07FF8000 ~ 0x07FFF000
 
-?0x0708DFFF
+unknow memory field 0x0708DFFF
 
-?heap?0x0x60AC9F8
+maybe 3gx heap memory 0x0x60AC9F8
