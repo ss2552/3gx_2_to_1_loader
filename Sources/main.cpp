@@ -8,11 +8,14 @@ namespace CTRPluginFramework{
     void main(void){
         
         uint16_t *const fb = (uint16_t *)((void *)0x1F48F000);
-
-        int32_t y;
-        for(y = 0; y < 30; y++)
+        
+        uint32_t posX = 170, posY = 200;
+        for(int32_t y = 0; y < 30; y++)
         {
-            fb[((50 * 400 * 2 + (400 - y - 50 - 1) * 2) + (5 - 3) * 2 * 400) / 2] = 0xFFFFFF;
+            for(int32_t x = 0; x < 10; x++){
+                uint32_t screenPos = ((posX * 240 * 2 + (240 - y - posY - 1) * 2) + (5 - x) * 2 * 240);
+                fb[screenPos / 2] = 0x000000;
+            }
         }
     }
 }
