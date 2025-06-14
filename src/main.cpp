@@ -13,14 +13,14 @@
 #define GREEN_COLOR             0x00FF00
 #define RED_COLOR               0xFF
 
+/*
 struct fb {
      u8 *top_left;
      u8 *top_right;
      u8 *bottom;
 };
 
-struct fb fbs[2] =
-{
+struct fb fbs[2] = {
     {
         .top_left  = (u8 *)0x18300000,
         .top_right = (u8 *)0x18300000,
@@ -32,6 +32,7 @@ struct fb fbs[2] =
         .bottom    = (u8 *)0x18446500,
     },
 };
+*/
 
 namespace CTRPluginFramework{
     void main(void){
