@@ -3,13 +3,13 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/Includes/**",
-                "Includes"
+                "${workspaceFolder}/includes",
+                "${workspaceFolder}/includes/3ds"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
-            "cStandard": "c17",
-            "cppStandard": "c++14",
+            "cStandard": "gnu99",
+            "cppStandard": "gnu++98",
             "intelliSenseMode": "linux-clang-x64"
         }
     ],
